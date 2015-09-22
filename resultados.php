@@ -42,6 +42,7 @@ $tipoGramatica = getTipoGramatica($gramaticas);
     </head>
     <body>
         <h1>Resultados</h1>
+
         <h2>Grámatica</h2>
         <h3>Formalismo:</h3>
         <p><?= $formalismo ?></p>
@@ -64,6 +65,9 @@ $tipoGramatica = getTipoGramatica($gramaticas);
             echo '<p>' . gerarSentenca($gramaticas[$SimboloInicial], $gramaticas) . '</p>';
         }
         ?>
+
+        <h3>Tipo de Grámatica</h3>
+        <?= $tipoGramatica ?>
     </body>
 </html>
 

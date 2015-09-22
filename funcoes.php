@@ -1,4 +1,5 @@
 <?php
+require_once('classes/gramatica_tipos.php');
 
 function gerarSentenca($gramaticaInicio, $gramaticas, $novaSentenca = '', $iteracao = 0) {
     if (temBarra($gramaticaInicio)) {
@@ -56,11 +57,6 @@ function escolheUmSimboloRandom($simbolosParaSubstituir) {
 }
 
 function getTipoGramatica($gramaticas) {
-    /* var_dump($gramaticas);
-      exit; */
-    foreach ($gramaticas as $variavel => $gramatica) {
-        
-    }
-
-    return '';    
+    $objGramaticaTipos = new GramaticaTipos();
+    return $objGramaticaTipos->getTipo($gramaticas);
 }
