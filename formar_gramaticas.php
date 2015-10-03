@@ -64,13 +64,10 @@ $todasVariaveis = array_merge($dadosNoTerminais, $dadosTerminais);
 
         </script>
     </head>
-    <body>
+    <body>        
         <h1>Forme as gramáticas</h1>
-        <p>Clique primeiro em um box e depois em alguma das variáveis abaixo.<br />
-            Obs: O símbolo inicial será o valor do 1º box.
-        </p>
+        <p>Clique primeiro em um box e depois em alguma das variáveis abaixo.</p>
         <form action="resultados.php" method="post">
-
             <?php
             echo 'NT: ';
             foreach ($dadosNoTerminais as $noTerminal) {
@@ -102,7 +99,25 @@ $todasVariaveis = array_merge($dadosNoTerminais, $dadosTerminais);
             foreach ($dadosTerminais as $Terminal) {
                 echo '<input type="hidden" name="data[Terminais][]" value="' . $Terminal . '" />';
             }
-            ?>    
+            ?>  
+
+              
+            Escolha o Símbolo Inicial:
+            <div>
+                <?php
+                foreach ($dadosNoTerminais as $indice => $noTerminal) {
+                    $checked = '';
+                    if ($indice == 0) {
+                        $checked = 'checked';  // atribui para o 1º NT checked
+                    }
+
+                    echo '<input id="lab' . $indice . '" type="radio" name="data[simbolo_inicio]" ' . $checked . ' value="' . $noTerminal . '">';
+                    echo '<label for="lab' . $indice . '">' . $noTerminal . '</label>';
+                    echo '<br />';
+                }
+                ?>
+            </div>
+            <br /><br />
             <input type="submit">
         </form>
     </body>
