@@ -24,11 +24,10 @@ foreach ($variaveisTerminaveis as $variavelTerminavel) {
 
 $terminaveis = rtrim($terminaveis, ","); // remove ultima virgula
 $varNaoTerminais = rtrim($varNaoTerminais, ",");
-reset($gramaticas); // faz o ponteiro do array ir para a 1ª posicao
-$SimboloInicial = key($gramaticas); // pega 1º indice do array como variavel inicial
+$simboloInicial = $_POST['data']['simbolo_inicio'];
 
 
-$formalismo = 'G = ({' . $varNaoTerminais . '}, {' . $terminaveis . '}, P, ' . $SimboloInicial . ')';
+$formalismo = 'G = ({' . $varNaoTerminais . '}, {' . $terminaveis . '}, P, ' . $simboloInicial . ')';
 
 $tipoGramatica = getTipoGramatica($gramaticas);
 ?>
@@ -62,7 +61,7 @@ $tipoGramatica = getTipoGramatica($gramaticas);
         <h3>Sentenças Geradas:</h3>
         <?php
         for ($i = 0; $i < 5; $i++) {
-            echo '<p>' . gerarSentenca($gramaticas[$SimboloInicial], $gramaticas) . '</p>';
+            echo '<p>' . gerarSentenca($gramaticas[$simboloInicial], $gramaticas) . '</p>';
         }
         ?>
 
