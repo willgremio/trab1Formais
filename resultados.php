@@ -13,8 +13,9 @@ foreach ($variaveisLadoEsquerdo as $indice => $esquerdo) {
 }
 
 $variaveisTerminaveis = $_POST['data']['Terminais'];
+$variaveisNaoTerminaveis = $_POST['data']['NaoTerminais'];
 $varNaoTerminais = $terminaveis = '';
-foreach ($gramaticas as $variavelNaoTermianal => $gramatica) {
+foreach ($variaveisNaoTerminaveis as $variavelNaoTermianal) {
     $varNaoTerminais .= $variavelNaoTermianal . ',';
 }
 
