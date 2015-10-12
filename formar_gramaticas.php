@@ -113,6 +113,7 @@ $todasVariaveis = array_merge($dadosNoTerminais, $dadosTerminais);
 
                     echo '<input id="lab' . $indice . '" type="radio" name="data[simbolo_inicio]" ' . $checked . ' value="' . $noTerminal . '">';
                     echo '<label for="lab' . $indice . '">' . $noTerminal . '</label>';
+                    echo '<input type="hidden" name="data[NaoTerminais][]" value="' . $noTerminal . '" />';
                     echo '<br />';
                 }
                 ?>
