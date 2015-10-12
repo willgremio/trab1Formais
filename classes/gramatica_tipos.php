@@ -15,9 +15,9 @@ class GramaticaTipos {
             return 'Grámatica Sensível ao Contexto ou Tipo 1';
         }
 
-        if ($this->isTipo0($gramaticas)) {
+        //if ($this->isTipo0($gramaticas)) {
             return 'Grámatica Irrestrita ou Tipo 0';
-        }
+        //}
     }
 
     public function isTipo0($gramatica) {
@@ -85,6 +85,19 @@ class GramaticaTipos {
         }
 
         return true;
+    }
+    
+    public static function verificaRegraTipo1($ladoEsquerdo, $gramatica) {
+        $ladoEsquerdoCheck = $ladoDireitoCheck = false;
+        if ( strlen($ladoEsquerdo) <= strlen($gramatica) ) { // lado esquerdo: comprimento menor ou igual a sentença do lado direito
+            $ladoEsquerdoCheck = true;
+        }
+
+        if ( (strlen($gramatica) >= strlen($ladoEsquerdo)) && !self::temOcorrenciaSentenciaVazia($gramatica)) { //comprimento maior ou igual a sentença do lado esquerdo e não é aceita a setença vazia
+            $ladoDireitoCheck = true;
+        }
+
+        return $ladoEsquerdoCheck && $ladoDireitoCheck;
     }
 
     public static function verificaRegraTipo2($ladoEsquerdo, $gramatica) {
