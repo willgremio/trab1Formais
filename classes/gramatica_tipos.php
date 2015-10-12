@@ -24,8 +24,25 @@ class GramaticaTipos {
         //regra
     }
 
-    public function isTipo1($gramatica) {
-        //regra
+    public function isTipo1($gramaticas) {
+        foreach ($gramaticas as $ladoEsquerdo => $gramatica) {
+            if (self::temBarra($gramatica)) {
+                $gramatica = explode('|', $gramatica); // precisa verificar cada gramatica
+                foreach ($gramatica as $gram) {
+                    if (!self::verificaRegraTipo1($ladoEsquerdo, $gram)) {
+                        return false;
+                    }
+                }
+
+                continue; // faz ir p/ proximo valor do foreach
+            }
+
+            if (!self::verificaRegraTipo1($ladoEsquerdo, $gramatica)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public function isTipo2($gramaticas) {
@@ -72,7 +89,7 @@ class GramaticaTipos {
 
     public static function verificaRegraTipo2($ladoEsquerdo, $gramatica) {
         $ladoEsquerdoCheck = $ladoDireitoCheck = false;
-        if (strlen($ladoEsquerdo) == 1 && self::temSimboloNaoTerminal($ladoEsquerdo)) { // sempre um e apenas um não-terminal 
+        if (strlen($ladoEsquerdo) == 1 && self::temSimboloNaoTerminal($ladoEsquerdo)) { // lado esquerdo sempre um e apenas um não-terminal 
             $ladoEsquerdoCheck = true;
         }
 
