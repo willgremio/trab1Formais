@@ -37,9 +37,9 @@ function gerarSentenca($gramaticaInicio, $gramaticas, $novaSentenca = '', $itera
 
     if (temSimboloNaoTerminal($sentencaSubstituida)) {
         $iteracao++;
-        gerarSentenca($sentencaSubstituida, $gramaticas, $novaSentenca, $iteracao);
+        return gerarSentenca($sentencaSubstituida, $gramaticas, $novaSentenca, $iteracao);
     } else {
-        echo $novaSentenca;
+        return $novaSentenca;
     }
 }
 
