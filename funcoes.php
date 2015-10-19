@@ -1,7 +1,8 @@
 <?php
+
 require_once('classes/gramatica_tipos.php');
 
-function gerarSentenca($gramaticaInicio, $gramaticas, $novaSentenca = '', $iteracao = 0) {
+function gerarSentenca($gramaticaInicio, $gramaticas, $novaSentenca = '', $iteracao = 0, $retornarSentencaFull = true) {
     if (temBarra($gramaticaInicio)) {
         $gramaticasDaVariavel = explode('|', $gramaticaInicio);
         $gramaticaInicio = escolheUmSimboloRandom($gramaticasDaVariavel);
@@ -37,10 +38,54 @@ function gerarSentenca($gramaticaInicio, $gramaticas, $novaSentenca = '', $itera
 
     if (temSimboloNaoTerminal($sentencaSubstituida)) {
         $iteracao++;
-        return gerarSentenca($sentencaSubstituida, $gramaticas, $novaSentenca, $iteracao);
-    } else {
+        return gerarSentenca($sentencaSubstituida, $gramaticas, $novaSentenca, $iteracao, $retornarSentencaFull);
+    }
+
+    if ($retornarSentencaFull) {
         return $novaSentenca;
     }
+
+    return $sentencaSubstituida;
+}
+
+function getLinguagemGramatica($gramaticaInicio, $gramaticas) {
+    $sentencasGeradas = [];
+    for ($i = 0; $i < 8; $i++) {
+        $sentencasGeradas[] = gerarSentenca($gramaticaInicio, $gramaticas, '', 0, false);
+    }
+
+    $letrasEncontradas = [];
+    $sentencaMinima = $sentencasGeradas[0];
+    foreach ($sentencasGeradas as $sentenca) {
+        if (strlen($sentenca) < strlen($sentencaMinima)) {
+            $sentencaMinima = $sentenca;
+        }
+
+        for ($i = 0; $i < strlen($sentenca); $i++) {
+            $letra = $sentenca[$i];
+            if (!isset($letrasEncontradas[$letra])) {
+                $letrasEncontradas[$letra] = $letra;
+            }
+        }
+    }
+
+    $padraoLinguagem = '';
+    $letrasDaSentencaMinina = [];
+    for ($i = 0; $i < strlen($sentencaMinima); $i++) {
+        $letra = $sentencaMinima[$i];
+        $letrasDaSentencaMinina[$letra] = $letra;
+        $padraoLinguagem .= $letra . '<sup>n</sup>';
+    }
+
+    
+    foreach ($letrasEncontradas as $letra) {
+        if(!isset($letrasDaSentencaMinina[$letra])) { //verifica se nao é nehuma letra da sentenca minima
+            $padraoLinguagem .= $letra . '<sup>m</sup>';
+        }
+    }
+    
+    $padraoLinguagem .= '; n>=1, m>=0';
+    return 'L(G) = {' . $padraoLinguagem . '}';
 }
 
 function temSimboloNaoTerminal($string) {
