@@ -31,6 +31,7 @@ $simboloInicial = $_POST['data']['simbolo_inicio'];
 $formalismo = 'G = ({' . $varNaoTerminais . '}, {' . $terminaveis . '}, P, ' . $simboloInicial . ')';
 
 $tipoGramatica = getTipoGramatica($gramaticas);
+$linguagem = getLinguagemGramatica($gramaticas[$simboloInicial], $gramaticas);
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +69,9 @@ $tipoGramatica = getTipoGramatica($gramaticas);
 
         <h3>Tipo de Grámatica</h3>
         <?= $tipoGramatica ?>
+        
+        <h3>Linguagem</h3>
+        <?= $linguagem ?>
     </body>
 </html>
 
