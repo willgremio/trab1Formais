@@ -2,26 +2,25 @@
 
 class GramaticaTipos {
 
+    const GRAMATICA_TIPO_0 = 'Grámatica Irrestrita ou Tipo 0';
+    const GRAMATICA_TIPO_1 = 'Grámatica Sensível ao Contexto ou Tipo 1';
+    const GRAMATICA_TIPO_2 = 'Grámatica Livre de Contexto ou Tipo 2';
+    const GRAMATICA_TIPO_3 = 'Grámatica Regular ou Tipo 3';
+
     public function getTipo($gramaticas) {
         if ($this->isTipo3($gramaticas)) {
-            return 'Grámatica Regular ou Tipo 3'; //feito regra. fazer testes
+            return self::GRAMATICA_TIPO_3;
         }
 
         if ($this->isTipo2($gramaticas)) {
-            return 'Grámatica Livre de Contexto ou Tipo 2';
+            return self::GRAMATICA_TIPO_2;
         }
 
         if ($this->isTipo1($gramaticas)) {
-            return 'Grámatica Sensível ao Contexto ou Tipo 1';
+            return self::GRAMATICA_TIPO_1;
         }
 
-        //if ($this->isTipo0($gramaticas)) {
-            return 'Grámatica Irrestrita ou Tipo 0';
-        //}
-    }
-
-    public function isTipo0($gramatica) {
-        //regra
+        return self::GRAMATICA_TIPO_0;
     }
 
     public function isTipo1($gramaticas) {
@@ -86,14 +85,14 @@ class GramaticaTipos {
 
         return true;
     }
-    
+
     public static function verificaRegraTipo1($ladoEsquerdo, $gramatica) {
         $ladoEsquerdoCheck = $ladoDireitoCheck = false;
-        if ( strlen($ladoEsquerdo) <= strlen($gramatica) ) { // lado esquerdo: comprimento menor ou igual a sentença do lado direito
+        if (strlen($ladoEsquerdo) <= strlen($gramatica)) { // lado esquerdo: comprimento menor ou igual a sentença do lado direito
             $ladoEsquerdoCheck = true;
         }
 
-        if ( (strlen($gramatica) >= strlen($ladoEsquerdo)) && !self::temOcorrenciaSentenciaVazia($gramatica)) { //comprimento maior ou igual a sentença do lado esquerdo e não é aceita a setença vazia
+        if ((strlen($gramatica) >= strlen($ladoEsquerdo)) && !self::temOcorrenciaSentenciaVazia($gramatica)) { //comprimento maior ou igual a sentença do lado esquerdo e não é aceita a setença vazia
             $ladoDireitoCheck = true;
         }
 
@@ -129,6 +128,10 @@ class GramaticaTipos {
     public static function isOkLadoDireitoTipo3($gramatica) {
         //pode ocorrer ou somente um terminal 
         if (strlen($gramatica) == 1 && self::temSimboloTerminal($gramatica)) {
+            return true;
+        }
+        
+        if (strlen($gramatica) == 1 && self::temOcorrenciaSentenciaVazia($gramatica)) {
             return true;
         }
 

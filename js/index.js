@@ -1,5 +1,5 @@
 $(function() {
-    $("#NoTerminais, #Terminais").keyup(function() {
+    $("#NoTerminais, #Terminais").bind("keyup change", function(e) {
         var numero = $(this).val();
         if ($.isNumeric(numero)) {
             var html = 'Informe o símbolo de cada um:<br />';
@@ -22,4 +22,9 @@ $(function() {
 $(document).on('keyup', '.no_terminais', function() {
     var variavel = $(this).val();
     $(this).val(variavel.toUpperCase());
-})
+});
+
+$(document).on('keyup', '.terminais', function() {
+    var variavel = $(this).val();
+    $(this).val(variavel.toLowerCase());
+});

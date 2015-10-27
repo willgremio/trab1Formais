@@ -30,8 +30,7 @@ $simboloInicial = $_POST['data']['simbolo_inicio'];
 
 $formalismo = 'G = ({' . $varNaoTerminais . '}, {' . $terminaveis . '}, P, ' . $simboloInicial . ')';
 
-$tipoGramatica = getTipoGramatica($gramaticas);
-$linguagem = getLinguagemGramatica($gramaticas[$simboloInicial], $gramaticas);
+$tipoGramatica = Funcoes::getTipoGramatica($gramaticas);
 ?>
 
 <!DOCTYPE html>
@@ -46,32 +45,39 @@ $linguagem = getLinguagemGramatica($gramaticas[$simboloInicial], $gramaticas);
 
         <h2>Grámatica</h2>
         <h3>Formalismo:</h3>
-        <p><?= $formalismo ?></p>
+        <div class="conteudoDosTitulos">
+            <p><?= $formalismo ?></p>
 
-        P: { <br />
-        <div id="gramaticas">
-            <?php
-            foreach ($gramaticas as $variavel => $gramatica) :
-                echo $variavel . ' => ' . $gramatica . '<br />';
-            endforeach;
-            ?>
+            P: { <br />
+            <div id="gramaticas">
+                <?php
+                foreach ($gramaticas as $variavel => $gramatica) :
+                    echo $variavel . ' => ' . $gramatica . '<br />';
+                endforeach;
+                ?>
+            </div>
+
+            }
         </div>
 
-        }
-
+        <h3>Tipo de Grámatica</h3>
+        <div class="conteudoDosTitulos">
+            <?= $tipoGramatica ?>
+        </div>        
 
         <h3>Sentenças Geradas:</h3>
-        <?php
-        for ($i = 0; $i < 5; $i++) {
-            echo '<p>' . gerarSentenca($gramaticas[$simboloInicial], $gramaticas) . '</p>';
-        }
-        ?>
+        <div class="conteudoDosTitulos">
+            <?php
+            for ($i = 0; $i < 5; $i++) {
+                echo '<p>' . Funcoes::gerarSentenca($gramaticas[$simboloInicial], $gramaticas) . '</p>';
+            }
+            ?>        
+        </div>
 
-        <h3>Tipo de Grámatica</h3>
-        <?= $tipoGramatica ?>
-        
         <h3>Linguagem</h3>
-        <?= $linguagem ?>
+        <div class="conteudoDosTitulos">
+            <?= Funcoes::getLinguagemGramatica($gramaticas[$simboloInicial], $gramaticas); ?>
+        </div>
     </body>
 </html>
 
