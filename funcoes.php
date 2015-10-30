@@ -67,7 +67,7 @@ class Funcoes {
 
     public static function getLinguagemGramatica($gramaticaInicio, $gramaticas) {
         $sentencasGeradas = [];
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 15; $i++) {
             $sentencasGeradas[] = self::gerarSentenca($gramaticaInicio, $gramaticas, '', 0, false);
         }
 
@@ -88,20 +88,35 @@ class Funcoes {
 
         $padraoLinguagem = '';
         $letrasDaSentencaMinina = [];
+        $temOcorrenciaN = $temOcorrenciaM = false;
         for ($i = 0; $i < strlen($sentencaMinima); $i++) {
             $letra = $sentencaMinima[$i];
             $letrasDaSentencaMinina[$letra] = $letra;
+            $temOcorrenciaN = true;
             $padraoLinguagem .= $letra . '<sup>n</sup>';
         }
 
 
         foreach ($letrasEncontradas as $letra) {
             if (!isset($letrasDaSentencaMinina[$letra])) { //verifica se nao é nehuma letra da sentenca minima
+                $temOcorrenciaM = true;
                 $padraoLinguagem .= $letra . '<sup>m</sup>';
             }
         }
-
-        $padraoLinguagem .= '; n>=1, m>=0';
+        
+        $padraoLinguagem .= ';'; 
+        if($temOcorrenciaN) {
+            $padraoLinguagem .= ' n>=1'; 
+        }
+        
+        if($temOcorrenciaN && $temOcorrenciaM) {
+            $padraoLinguagem .= ',';
+        }
+        
+        if($temOcorrenciaM) {
+            $padraoLinguagem .= ' m>=0';
+        }        
+        
         return 'L(G) = {' . $padraoLinguagem . '}';
     }
 

@@ -68,7 +68,7 @@ $tipoGramatica = Funcoes::getTipoGramatica($gramaticas);
         <h3>Sentenças Geradas:</h3>
         <div class="conteudoDosTitulos">
             <?php
-            for ($i = 0; $i < 5; $i++) {
+            for ($i = 0; $i < 6; $i++) {
                 echo '<p>' . Funcoes::gerarSentenca($gramaticas[$simboloInicial], $gramaticas) . '</p>';
             }
             ?>        
