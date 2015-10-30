@@ -28,3 +28,7 @@ body {
 .conteudoDosTitulos {
     color: aquamarine;
 }
+
+a {
+	color: red;
+}
